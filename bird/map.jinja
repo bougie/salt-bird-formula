@@ -1,0 +1,22 @@
+{% set rawmap = salt['pillar.get']('bird', {
+    'lookup': salt['grains.filter_by']({
+        'Debian': {
+            'package_v4': 'bird',
+            'service_v4': 'bird',
+            'config_file_v4': '/etc/bird.conf',
+            'package_v6': 'bird6',
+            'service_v6': 'bird6',
+            'config_file_v6': '/etc/bird6.conf',
+        },
+        'FreeBSD': {
+            'package_v4': 'bird',
+            'service_v4': 'bird',
+            'config_file_v4': '/usr/local/etc/bird.conf',
+            'package_v6': 'bird6',
+            'service_v6': 'bird6',
+            'config_file_v6': '/usr/local/etc/bird6.conf',
+        },
+    }),
+    'enable_v4': True,
+    'enable_v6': True
+}, merge=True) %}

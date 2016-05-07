@@ -1,0 +1,22 @@
+log syslog all;
+# debug protocols all;
+
+router id {{salt['grains.get']('fqdn_ip4')[0]}};
+
+protocol direct {
+    interface "-lo*", "*";
+}
+
+protocol kernel {
+    learn;
+    persist;
+    scan time 20;
+    import all;
+    export all;
+}
+
+protocol device {
+    scan time 10;
+}
+
+include "{{local_config}}";
